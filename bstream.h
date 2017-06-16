@@ -3,11 +3,11 @@
  * Last modified on Mon May 21 16:06:35 PST 2012 by htiek
  * ----------------------------------------------------------
  * Defines the ibstream and obstream classes which are basically
- * same as the ordinary istream and ostream classes, but add the 
- * functionality to read and write one bit at a time. 
- * 
+ * same as the ordinary istream and ostream classes, but add the
+ * functionality to read and write one bit at a time.
+ *
  * The idea is that you can substitute an ibstream in place of an
- * istream and use the same operations (get, fail, >>, etc.) 
+ * istream and use the same operations (get, fail, >>, etc.)
  * along with added member functions of readBit, rewind, and size.
  *
  * Similarly, the obstream can be used in place of ofstream, and has
@@ -24,7 +24,7 @@
 #define _bstream_h
 
 #include <istream>
-#include <ostream>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 using namespace std;
@@ -49,8 +49,8 @@ public:
 	 * Initializes a new ibstream that is not attached to any source.	 You are
 	 * unlikely to use this function directly.
 	 */
-	ibstream();	
-	
+	ibstream();
+
 	/*
 	 * Member function: readBit
 	 * Usage: bit = in.readBit();
@@ -60,17 +60,17 @@ public:
 	 * Raises an error if this ibstream has not been properly opened.
 	 */
 	int readBit();
-	
+
 	/*
 	 * Member function: rewind
 	 * Usage: in.rewind();
 	 * -------------------
 	 * Rewinds the ibstream back to the beginning so that subsequent reads
-	 * start again from the beginning.	Raises an error if this ibstream 
+	 * start again from the beginning.	Raises an error if this ibstream
 	 * has not been properly opened.
 	 */
 	void rewind();
-	
+
 	/*
 	 * Member function: size
 	 * Usage: sz = in.size();
@@ -79,7 +79,7 @@ public:
 	 * Raises an error if this ibstream has not been properly opened.
 	 */
 	long size();
-	
+
 	/*
 	 * Member function: is_open()
 	 * Usage: if (ibs.is_open()) { ... }
@@ -89,7 +89,7 @@ public:
 	 * returns true.
 	 */
 	virtual bool is_open();
-	
+
 private:
 	int pos, curByte;
 	streampos lastTell;
@@ -126,7 +126,7 @@ public:
 	 * Raises an error if this ibstream has not been properly opened.
 	 */
 	void writeBit(int bit);
-	
+
 	/*
 	 * Member function: size
 	 * Usage: sz = in.size();
@@ -135,7 +135,7 @@ public:
 	 * Raises an error if this obstream has not been properly opened.
 	 */
 	long size();
-	
+
 	/*
 	 * Member function: is_open()
 	 * Usage: if (ibs.is_open()) { ... }
@@ -145,7 +145,7 @@ public:
 	 * returns true.
 	 */
 	virtual bool is_open();
-	
+
 private:
 	int pos, curByte;
 	streampos lastTell;
@@ -158,7 +158,7 @@ private:
  * You can treat this class like a normal ifstream, except that there is
  * extra support for bit-level operations.
  */
- 
+
 class ifbstream: public ibstream {
 public:
 	/*
@@ -169,7 +169,7 @@ public:
 	 * open a file for reading using the .open() member functions.
 	 */
 	ifbstream();
-	
+
 	/*
 	 * Constructor: ifbstream(const char* filename);
 	 * Constructor: ifbstream(string filename);
@@ -180,7 +180,7 @@ public:
 	 */
 	ifbstream(const char* filename);
 	ifbstream(string filename);
-	
+
 	/*
 	 * Member function: open(const char* filename);
 	 * Member function: open(string filename);
@@ -192,7 +192,7 @@ public:
 	 */
 	void open(const char* filename);
 	void open(string filename);
-	
+
 	/*
 	 * Member function: is_open();
 	 * Usage: if (ifb.is_open()) { ... }
@@ -201,7 +201,7 @@ public:
 	 * reading.
 	 */
 	bool is_open();
-	
+
 	/*
 	 * Member function: close();
 	 * Usage: ifb.close();
@@ -210,7 +210,7 @@ public:
 	 * stream is not open, puts the stream into a fail state.
 	 */
 	void close();
-	
+
 private:
 	/* The actual file buffer which does reading and writing. */
 	filebuf fb;
@@ -238,7 +238,7 @@ public:
 	 * open a file for writing using the .open() member functions.
 	 */
 	ofbstream();
-	
+
 	/*
 	 * Constructor: ofbstream(const char* filename);
 	 * Constructor: ofbstream(string filename);
@@ -250,7 +250,7 @@ public:
 	 */
 	ofbstream(const char* filename);
 	ofbstream(string filename);
-	
+
 	/*
 	 * Member function: open(const char* filename);
 	 * Member function: open(string filename);
@@ -263,7 +263,7 @@ public:
 	 */
 	void open(const char* filename);
 	void open(string filename);
-	
+
 	/*
 	 * Member function: is_open();
 	 * Usage: if (ofb.is_open()) { ... }
@@ -272,7 +272,7 @@ public:
 	 * reading.
 	 */
 	bool is_open();
-	
+
 	/*
 	 * Member function: close();
 	 * Usage: ifb.close();
@@ -304,13 +304,13 @@ public:
 	 * Constructs an istringbstream reading the specified string.
 	 */
 	istringbstream(string s = "");
-	
+
 	/* Member Function: str(string s);
 	 * Usage: isb.str("This is some text!");
 	 * ---------------------------
 	 * Sets the underlying string of the istringbstream.
 	 */
-	void str(string s);	
+	void str(string s);
 private:
 	/* The actual string buffer that does character storage. */
 	stringbuf sb;
@@ -325,7 +325,7 @@ private:
  * files on disk, but you can use it in your own testing if you would
  * like.
  */
- 
+
 class ostringbstream: public obstream {
 public:
 	/* Constructor: ostringbstream();
@@ -334,14 +334,14 @@ public:
 	 * Constructs an ostringbstream.
 	 */
 	ostringbstream();
-	
+
 	/* Member function: string str();
 	 * Usage: cout << osb.str() << endl;
 	 * ----------------------------
 	 * Retrieves the underlying string of the istringbstream.
 	 */
 	string str();
-	
+
 private:
 	/* The actual string buffer that does character storage. */
 	stringbuf sb;
