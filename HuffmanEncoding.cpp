@@ -22,9 +22,20 @@
  * the PSEUDO_EOF character.
  */
 Map<ext_char, int> getFrequencyTable(istream& file) {
-	// TODO: Implement this!
+	Map <ext_char, int> characterFrequency();
+
+	int characterCount = file.size();
+
+	for (int i = 0; i < n; i++) {
+		ext_char ch = char(file.get());
+		if (characterFrequency.containsKey(ext_char)) {
+			characterFrequency[ext_char]++;
+		} else {
+			characterFrequency.put(ext_char, 1);
+		}
+	}
 	
-	return Map<ext_char, int>();	
+	return characterFrequency;	
 }
 
 /* Function: buildEncodingTree
